@@ -17,22 +17,24 @@ void setup() {
 }
 
 void loop(){
-  switch (patternNumber%5) {
-    case 1:
-      clearAll();    
+  switch (patternNumber%7) {
+    case 1:   
       pattern1();
       break;
-    case 2:
-      clearAll();    
+    case 2:  
       pattern2();
       break;
     case 3:
-      clearAll();
       pattern3();
       break;
     case 4:
-      clearAll();
       pattern4();
+      break;
+    case 5:
+      pattern5();
+      break;
+    case 6:
+      pattern6();
       break;
     default:
       clearAll();
@@ -43,19 +45,51 @@ void loop(){
 
 // ----- PATTERNS ----- //
 
+// Pattern 0 is implicitly all off
+
+// All flashing
 void pattern1() {
+  pattern2(); // All on
+  delay(val());
+  clearAll(); // All off
+  delay(val());
+}
+
+// All on
+void pattern2(){
+  allOn();
+}
+
+// Bouncing
+void pattern3() {
+  digitalWrite(ledPin_1, HIGH);
+  digitalWrite(ledPin_2, LOW);
+  delay(val()/2);
+  digitalWrite(ledPin_2, HIGH);
+  digitalWrite(ledPin_1, LOW);
+  delay(val()/2);
+  digitalWrite(ledPin_3, HIGH);
+  digitalWrite(ledPin_2, LOW);
+  delay(val()/2);
+  digitalWrite(ledPin_2, HIGH);
+  digitalWrite(ledPin_3, LOW);
+  delay(val()/2);
+}
+
+// Turn on in sequence
+void pattern4() {
   digitalWrite(ledPin_1, HIGH); 
-  delay (val()/2);
+  delay (val());
   digitalWrite(ledPin_2, HIGH); 
   delay (val());
   digitalWrite(ledPin_3, HIGH); 
-  delay (val()*2);
+  delay (val());
   clearAll();
   delay(val());
 }
 
-void pattern2 () {
-  // Turn on and off in travelling pattern
+// Turn on and off in travelling pattern
+void pattern5 () {
   digitalWrite(ledPin_3, HIGH);
   delay(val()/2);
   digitalWrite(ledPin_2, HIGH);
@@ -68,18 +102,8 @@ void pattern2 () {
   digitalWrite(ledPin_1, LOW);
 }
 
-void pattern3() {
-  digitalWrite(ledPin_1, HIGH); 
-  delay (val()*random(1, 3));
-  digitalWrite(ledPin_2, HIGH); 
-  delay (val()*random(1, 3));
-  digitalWrite(ledPin_3, HIGH); 
-  delay (val()*random(1, 3));   
-  clearAll();
-  delay(val());
-}
-
-void pattern4() {
+// Alternate flash
+void pattern6() {
   digitalWrite(ledPin_1, HIGH); 
   digitalWrite(ledPin_3, HIGH);
   digitalWrite(ledPin_2, LOW);
@@ -94,6 +118,12 @@ void clearAll() {
   digitalWrite(ledPin_1, LOW);
   digitalWrite(ledPin_2, LOW); 
   digitalWrite(ledPin_3, LOW);
+}
+
+void allOn() {
+  digitalWrite(ledPin_1, HIGH);
+  digitalWrite(ledPin_2, HIGH);
+  digitalWrite(ledPin_3, HIGH); 
 }
 
 
