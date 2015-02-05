@@ -135,15 +135,15 @@ int val(){
 
 /*
  * Interrupt for button push
- * Deals with debouncing switch. Advances and cycle
+ * Deals with debouncing switch. Advances
  * the pattern once for each button push
 */
 void lightISR() {
   static volatile unsigned long lastInterruptTime = 0;
   unsigned long interruptTime = millis();
   
+  // Wait for 200 ms before allowing another interrupt
   if (interruptTime - lastInterruptTime > 200) {
-    // Code for switching patterns
     patternNumber++;
   }
   
